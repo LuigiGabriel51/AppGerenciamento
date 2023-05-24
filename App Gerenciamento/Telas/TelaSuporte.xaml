@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Gerenciamento.Telas.TelaSuporte" BackgroundColor="#FFEC8B" >
+    <ScrollView>
+    <AbsoluteLayout>
+
+        <StackLayout AbsoluteLayout.LayoutBounds="0,0,360,700" Orientation="Vertical" Spacing="20" BackgroundColor="Transparent">
+            <Button x:Name="btFaq" WidthRequest="340" Margin="0,100,0,0" BackgroundColor="{StaticResource Primary}"                  
+            Clicked="Button_Clicked" AbsoluteLayout.LayoutBounds="10,0,330,40"
+            Text="▲  FAQ" TextColor="White" FontAttributes="Bold" >
+            </Button>
+            
+            
+            <Frame x:Name="faq" WidthRequest="320" HeightRequest="230" Margin="0,-20,0,0" CornerRadius="0" IsVisible="false">
+                <ListView x:Name="FAQlist" RowHeight="70">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <ScrollView>
+                                    <StackLayout>
+                                        <Label Text="{Binding pergunta}" TextColor="{StaticResource Primary}" FontSize="13"/>
+                                        <Label Text="{Binding resposta}" TextColor="Black" FontSize="10"/>
+                                    </StackLayout>
+                                </ScrollView>
+                                
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
+
+            <Button x:Name="btDuv" WidthRequest="340" Margin="0,0,0,0" BackgroundColor="{StaticResource Primary}"
+            Clicked="Button_Clicked_1" AbsoluteLayout.LayoutBounds="10,40,300,40"
+            Text="▲  DÚVIDAS OU PROBLEMAS TÉCNICOS" TextColor="White" FontAttributes="Bold">
+            </Button>
+
+            <Frame x:Name="duv" HeightRequest="450" WidthRequest="320" Margin="0,-20,0,0" CornerRadius="0" IsVisible="false">
+                <VerticalStackLayout Padding="0" Spacing="30">
+                        <HorizontalStackLayout Spacing="40">
+
+                            <ImageButton x:Name="btCarta" Source="carta.png" BackgroundColor="#FFEC8B" 
+                                WidthRequest="120" HeightRequest="80" Clicked="btCarta_Clicked" CornerRadius="10">
+
+                            </ImageButton>
+                            <ImageButton x:Name="btChatbot" Source="chatbot.png"   BackgroundColor="#FFEC8B" 
+                                     WidthRequest="120" HeightRequest="80" Clicked="btCarta_Clicked2" CornerRadius="10" BorderColor="#FFF68F"
+                                     >
+                            </ImageButton>
+
+
+                        </HorizontalStackLayout>
+                        <Frame BackgroundColor="Transparent" HeightRequest="300" Padding="3" x:Name="frameCarta" IsVisible="false" BorderColor="Transparent">
+                                <ScrollView HeightRequest="300">
+                                    <StackLayout Padding="0" Spacing="5" HeightRequest="400">
+                                        <Entry Placeholder="Nome Completo"  TextColor="Black" BackgroundColor="#E8E8E8" x:Name="nome"/>
+                                        <Entry Placeholder="E-mail"  TextColor="Black" BackgroundColor="#E8E8E8" Keyboard="Email" x:Name="email"/>
+                                        <HorizontalStackLayout>
+                                            <Entry Placeholder="Telefone" x:Name="telefone"  TextColor="Black"  BackgroundColor="#E8E8E8" WidthRequest="135" Keyboard="Telephone" />
+                                        <Picker Title="   Cargo          ▼     " Margin="10,0,0,0"  FontSize="11"
+                                                BackgroundColor="#E8E8E8" TextColor="Black" WidthRequest="130"
+                                                x:Name="cargo">
+                                            <Picker.Items>
+                                                    <x:String>Engenheiro Mecânico</x:String>
+                                                    <x:String>Engenheiro Civil</x:String>
+                                                    <x:String>Engenheiro Agrônomo</x:String>
+                                                </Picker.Items>
+                                            </Picker>
+                                        </HorizontalStackLayout>
+                                        <Picker Title="  Motivo                                                 ▼     " Margin="0,0,0,0" 
+                                            BackgroundColor="#E8E8E8" TextColor="Black" x:Name="motivo">
+                                            <Picker.Items>
+                                                <x:String>Problemas com o Aplicativo</x:String>
+                                                <x:String>Falha no Aplicativo</x:String>
+                                                <x:String>Erros de logs</x:String>
+                                            </Picker.Items>
+                                        </Picker>
+                                        <Editor HorizontalTextAlignment="Start" Placeholder="Descreva sua dúvida ou problema"  TextColor="Black" BackgroundColor="#E8E8E8"
+                                       HeightRequest="100" WidthRequest="270" Keyboard="Chat" Margin="10,0,10,0" x:Name="msg"/>
+                                        <Button BackgroundColor="{StaticResource Primary}" Text="Enviar" TextColor="White" FontAttributes="Bold" Clicked="Button_Clicked_2"/>
+                                    </StackLayout>
+                                </ScrollView>
+                            </Frame>
+                            <Frame BackgroundColor="#EEE0E5" HeightRequest="300" Padding="0" x:Name="frameAD" IsVisible="false" BorderColor="Black" >
+                                <StackLayout BackgroundColor="Transparent" HeightRequest="300">
+                                    <Frame Padding="0" WidthRequest="280" HeightRequest="50" BackgroundColor="#B5B5B5" BorderColor="Black" 
+                                       >
+                                        <Label Text="Assitente Digital" TextColor="Black" BackgroundColor="Transparent"
+                                       HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="15"/>
+                                        <Frame.Shadow>
+                                            <Shadow Brush="black"
+                                                Offset="40,40"
+                                                Radius="40"
+                                                Opacity="0.8"></Shadow>
+                                        </Frame.Shadow>
+
+                                    </Frame>
+                                <Frame VerticalOptions="EndAndExpand" HeightRequest="40" BackgroundColor="#FFEC8B" BorderColor="Transparent" Padding="0">
+
+                                    <HorizontalStackLayout WidthRequest="280">
+                                        
+                                        <Editor Placeholder="Mensagem" PlaceholderColor="Black" VerticalOptions="Center"
+                                                TextColor="Black" WidthRequest="220" Margin="10,0,0,0"/>
+                                        <Button WidthRequest="50" HeightRequest="40" HorizontalOptions="EndAndExpand" FontSize="25"
+                                                Text="➤" Padding="0" BackgroundColor="Transparent"/>
+
+                                    </HorizontalStackLayout>
+                                    
+                                </Frame>
+                                </StackLayout>
+                            </Frame>
+                    </VerticalStackLayout>
+            </Frame>
+        </StackLayout>
+    </AbsoluteLayout>
+    </ScrollView>
+</ContentPage>

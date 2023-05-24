@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:controls="clr-namespace:Microsoft.Maui.Controls;assembly=Microsoft.Maui.Controls"
+             x:Class="App_Gerenciamento.PageRecuperacao"
+             BackgroundColor="#FFEC8B">
+    <VerticalStackLayout>
+        <RadioButton x:Name="op1" GroupName="Opcoes" IsChecked="{Binding Opcao1}" Content="Enviar mensagem para o E-MAIL cadastrado" HorizontalOptions="Center"/>
+        <RadioButton x:Name="op2" GroupName="Opcoes" IsChecked="{Binding Opcao2}" Content="Enviar mensagem para o NÚMERO DE TELEFONE cadastrado" HorizontalOptions="Center"/>
+
+        <Button
+                x:Name="continuar"
+                Text="Continuar"
+                Clicked="continuar_Clicked"
+                HorizontalOptions="Center" />
+    </VerticalStackLayout>
+</ContentPage>

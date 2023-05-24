@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Gerenciamento.Telas.PageUpdateData"
+             Title="PageUpdateData" BackgroundColor="#FFEC8B">
+    <VerticalStackLayout Spacing="100">
+        <ImageButton Source="seta.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start" Margin="20,20,0,0" Clicked="ImageButton_Clicked"/>
+        <Image Source="logoprincipal" HeightRequest="120" HorizontalOptions="Center" Margin="0,-30,0,0"/>
+        <VerticalStackLayout HorizontalOptions="Center" Padding="10" Spacing="30" Margin="0,0,0,0">
+            <HorizontalStackLayout Spacing="10">
+
+                <Frame HeightRequest="40" WidthRequest="250" Padding="0">
+                    <Entry x:Name="telefone" TextColor="Black" Keyboard="Numeric" Placeholder="Telefone" PlaceholderColor="Black" Margin="10,0,0,0"/>
+                </Frame>
+                
+                <Frame Padding="0" CornerRadius="20" BackgroundColor="#CDC9C9" BorderColor="Transparent">
+                    <Picker x:Name="genero" TextColor="Black" Title="Gênero ⤵" SelectedIndexChanged="generoSelect"
+                            TitleColor="Black" BackgroundColor="#CDC9C9" 
+                            WidthRequest="70"  Margin="10,0,0,0">
+                        <Picker.Items>
+                            <x:String>Masculino</x:String>
+                            <x:String>Feminino</x:String>
+                            <x:String>Prefiro não responder</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+                
+            </HorizontalStackLayout>
+
+            <HorizontalStackLayout Spacing="10">
+                
+                <Frame HeightRequest="40" WidthRequest="250" Padding="0">
+                    <Entry x:Name="email" TextColor="Black" Placeholder="Email" PlaceholderColor="Black" Margin="10,0,0,0" Keyboard="Email"/>
+                </Frame>
+
+                <Frame Padding="0" CornerRadius="20" BackgroundColor="#CDC9C9" BorderColor="Transparent" >
+                    <Picker x:Name="cargo" TextColor="Black" Title="Cargo ⤵"  SelectedIndexChanged="cargoSelect"
+                            TitleColor="Black" BackgroundColor="#CDC9C9" 
+                            WidthRequest="70" Margin="10,0,0,0">
+                        <Picker.Items>
+                            <x:String>Engenheiro Mecânico</x:String>
+                            <x:String>Engenheiro Civil</x:String>
+                            <x:String>Engenheiro Agrônomo</x:String>
+                        </Picker.Items>
+                    </Picker>
+                </Frame>
+                
+            </HorizontalStackLayout>
+            
+            <Button Text="Atualizar" FontAttributes="Bold" Margin="0,50,0,0" Clicked="Atualiza"/>
+            
+        </VerticalStackLayout>
+    </VerticalStackLayout>
+</ContentPage>

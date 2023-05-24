@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Gerenciamento.Telas.TelaMissoes" BackgroundColor="#FFEC8B">
+    <AbsoluteLayout>
+
+        <Frame AbsoluteLayout.LayoutBounds="50,100,250,40" Padding="0" CornerRadius="2" BackgroundColor="Transparent">
+            <SearchBar BackgroundColor="Transparent" HeightRequest="260" CancelButtonColor="Black" TextColor="Black" TextChanged="SearchBar_TextChanged"/>
+        </Frame>
+        
+
+        <Frame AbsoluteLayout.LayoutBounds="20,150,350,550" BackgroundColor="Transparent" 
+               HasShadow="False"
+               BorderColor="Transparent">
+            <ListView BackgroundColor="Transparent" x:Name="p_list" RowHeight="100" 
+                      ItemSelected="p_list_ItemSelected" VerticalScrollBarVisibility="Never"
+                      SelectionMode="Single" HasUnevenRows="True" SeparatorVisibility="None" 
+                      >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Margin="0,20,0,20">
+                                <Frame BackgroundColor="#CFCFCF" BorderColor="Transparent" HeightRequest="100" WidthRequest="300">
+                                    <HorizontalStackLayout Padding="0" Spacing="30">
+                                        <Frame HeightRequest="50" WidthRequest="50" CornerRadius="30" HorizontalOptions="Start">
+                                            <Image Source="dotnet_bot.png" HeightRequest="50" WidthRequest="50"/>
+                                        </Frame>
+
+                                        <Label Text="{Binding Nome}" FontSize="15" FontAttributes="Bold"
+                                           TextColor="#7D26CD" WidthRequest="145"
+                                           BackgroundColor="Transparent"  HorizontalTextAlignment="Center"/>
+
+                                    </HorizontalStackLayout>
+                                </Frame>
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+        
+        <Button HeightRequest="730" WidthRequest="400" CornerRadius="0" BackgroundColor="Transparent"
+                IsVisible="False" Clicked="Button_Clicked" x:Name="bt"/>
+        
+        <Frame AbsoluteLayout.LayoutBounds="50,220,300,300" IsVisible="false" x:Name="F" HasShadow="True">
+            <ScrollView Orientation="Vertical" BackgroundColor="Beige">
+                <VerticalStackLayout Spacing="10">
+                    <Label Text="{Binding nome}" HorizontalOptions="Center" FontSize="14" FontAttributes="Bold"/>
+                    <ListView ItemsSource="{Binding fases}" RowHeight="100" WidthRequest="150" x:Name="Fases" VerticalScrollBarVisibility="Never">
+                        <ListView.ItemTemplate >
+                            <DataTemplate>
+                                <ViewCell Height="50" >
+                                    <Grid>
+                                        <Frame Padding="0">
+                                            <VerticalStackLayout Padding="0" BackgroundColor="Beige">
+                                                <Label Text="{Binding nome}" TextColor="Black"/>
+                                                <Label Text="{Binding data}" TextColor="Black"/>
+                                                <Label Text="{Binding duracao}" TextColor="Black"/>
+                                                <Label Text="{Binding descricao}" TextColor="Black"/>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </Grid>
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </VerticalStackLayout>
+            </ScrollView>
+            
+        </Frame>
+        
+    </AbsoluteLayout>
+</ContentPage>

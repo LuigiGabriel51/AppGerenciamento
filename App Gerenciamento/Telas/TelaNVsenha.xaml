@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Gerenciamento.Telas.TelaNVsenha"
+             BackgroundColor="#FFEC8B">
+
+    <VerticalStackLayout>
+        
+
+        <ImageButton Source="seta.png" HeightRequest="30" WidthRequest="30" HorizontalOptions="Start" Margin="10,0,0,0" Clicked="ImageButton_Clicked"/>
+        <Image Margin="0,0,0,20"
+                Source="logoprincipal.png"
+                HeightRequest="120"
+                HorizontalOptions="Center" />
+
+        <Grid Padding="0"  BackgroundColor="#FFD39B" HeightRequest="30" WidthRequest="200" >
+            <Entry x:Name="novaSenha1" Placeholder="Nova Senha" MaxLength="11" PlaceholderColor="#9C9C9C" IsPassword="True"  BackgroundColor="Transparent" Keyboard="Text" Margin="0,-5,0,-5" TextColor="Black" FontFamily="Lobster"/>
+        </Grid>
+
+        <Grid Padding="0"  BackgroundColor="#FFD39B" HeightRequest="30" WidthRequest="200">
+            <Entry Placeholder="digite sua senha novamente" x:Name="novaSenha2" PlaceholderColor="#9C9C9C" IsPassword="True"  BackgroundColor="Transparent" Margin="0,-5,0,-5" TextColor="Black" FontFamily="Lobster"/>
+        </Grid>
+
+        <Label x:Name="res"
+                SemanticProperties.HeadingLevel="Level2"
+                SemanticProperties.Description="Welcome to dot net Multi platform App U I"
+                FontSize="15"
+                HorizontalOptions="Center" Margin="0,-20,0,0" TextColor="#FA8072"/>
+
+        <Button
+                x:Name="bt" WidthRequest="100" CornerRadius="9"
+                Text="Continuar" BackgroundColor="#FFD39B" TextColor="{x:StaticResource Primary}" 
+                Clicked="Button_Clicked" FontAttributes="Bold" 
+                HorizontalOptions="Center" />
+
+    </VerticalStackLayout>
+</ContentPage>

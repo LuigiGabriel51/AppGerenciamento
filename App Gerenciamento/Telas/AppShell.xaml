@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell 
+    x:Class="App_Gerenciamento.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:App_Gerenciamento.Telas"
+    Shell.FlyoutBehavior="Disabled">
+    
+    <ShellContent Shell.NavBarIsVisible="False" ContentTemplate="{DataTemplate local:LoginPage}" Route="login" Shell.TabBarIsVisible="False"/>
+    <ShellContent Title="Nova Senha" Shell.NavBarIsVisible="False" ContentTemplate="{DataTemplate local:TelaNVsenha}" Route="TelaNVsenha">
+    </ShellContent>
+    <ShellContent Title="Nova Senha" Shell.NavBarIsVisible="False" ContentTemplate="{DataTemplate local:NovaSenhaUser}" Route="novaSenha">
+    </ShellContent>
+    <ShellContent Title="Atualizar Dados" Shell.NavBarIsVisible="False" ContentTemplate="{DataTemplate local:PageUpdateData}" Route="atualizaDados">
+    </ShellContent>
+
+    <TabBar Route="principal" Shell.NavBarIsVisible="False">
+
+        <ShellContent Icon="agenda.png" Title="Agenda" Shell.NavBarIsVisible="False"
+            ContentTemplate="{DataTemplate local:TelaAgenda}" Route="agenda"
+        />
+        <ShellContent Icon="meta.png" Title="Missões" Shell.NavBarIsVisible="False"
+            ContentTemplate="{DataTemplate local:TelaMissoes}" Route="missao"
+        />
+        <ShellContent Icon="suporte.png" Title="Suporte" Shell.NavBarIsVisible="False"
+            ContentTemplate="{DataTemplate local:TelaSuporte}" Route="suporte"
+        />
+        <ShellContent Icon="perfil.png" Title="Perfil" Shell.NavBarIsVisible="False"
+            ContentTemplate="{DataTemplate local:TelaUser}" Route="perfil"
+        />
+
+        
+    </TabBar>
+</Shell>

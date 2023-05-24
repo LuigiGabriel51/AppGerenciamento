@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="App_Gerenciamento.Telas.TelaAgenda"
+             BackgroundColor="#FFEC8B" >
+    
+    <VerticalStackLayout >
+        <Image Source="logoprincipal.png" HeightRequest="90" HorizontalOptions="End" Margin="0,60,30,20"/>
+       
+        <HorizontalStackLayout WidthRequest="300" Margin="0,50,0,0" Spacing="30" HorizontalOptions="End">
+            <Label x:Name="Ldata" Text="{Binding Data}" Margin="-30,0,40,0" 
+               TextColor="#7D26CD" 
+               FontAttributes="Bold" FontFamily="Roboto" FontSize="15"/>
+            <Image Source="agenda" HeightRequest="40" WidthRequest="40" Margin="80,-36,-90,0"/>
+            <Frame HeightRequest="80" WidthRequest="80" Margin="0,-25,0,0" BackgroundColor="Transparent" BorderColor="Transparent">
+                <DatePicker DateSelected="DatePicker_DateSelected" TextColor="Transparent"/>
+            </Frame>
+        </HorizontalStackLayout>
+        <Label Text="Selecione uma data para virificar Atividades" x:Name="infoData" TextColor="Black"
+               HorizontalOptions="Center" TextDecorations="Underline" WidthRequest="300"/>
+        <Frame x:Name="eventos" Margin="0,20,0,0" WidthRequest="300" BorderColor="#A020F0" HeightRequest="300" IsVisible="false">
+            <ListView x:Name="listAgenda" ItemSelected="listAgenda_ItemSelected" 
+                      BackgroundColor="Transparent" RowHeight="85">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <VerticalStackLayout>
+                                <Label Text="{Binding Nome}" TextColor="Black" FontAttributes="Bold" TextDecorations="Underline"
+                                       HorizontalOptions="Center" Margin="0,0,0,8"/>
+                                <HorizontalStackLayout>
+                                    
+                                </HorizontalStackLayout>
+                                <Label TextColor="Black">
+                                    <MultiBinding StringFormat="Data: {0}" >
+                                        <Binding Path="dia"/>
+
+                                    </MultiBinding>
+                                </Label>
+                                <Label TextColor="Black">
+                                    <MultiBinding StringFormat="Horário: {0}" >
+                                        <Binding Path="horario"/>
+
+                                    </MultiBinding>
+                                </Label>
+                                <Label Text="{Binding descricao}" TextColor="Black" LineBreakMode="TailTruncation"/>
+                            </VerticalStackLayout>
+                        </ViewCell>
+                       
+                    </DataTemplate>
+                    
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+        
+    </VerticalStackLayout>
+</ContentPage>
