@@ -52,7 +52,7 @@ public partial class TelaUser : ContentPage
 
     public async Task UpdateImage()
     {
-        const string Url = "https://e954-2804-5e7c-f831-8d00-b90c-a634-b86-7142.ngrok-free.app/sendImagePerfil";
+        const string Url = "https://00df-2804-5e7c-f831-8d00-2c32-edfe-8d2b-fd3d.ngrok-free.app/sendImagePerfil";
         try
         {
             modeloLogin pessoa = new modeloLogin
@@ -82,14 +82,14 @@ public partial class TelaUser : ContentPage
                 // Exibe a imagem em uma ImageView
                 img.Source = imagem;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Console.WriteLine(@"\t Requisição falhou.");
                 // Trata erros de requisição HTTP ou outros erros
                 await DisplayAlert("Erro", "Não foi possível exibir sua imagem de perfil.", "OK");
             }
         }
-        catch (Exception ex)
+        catch (Exception)
         {
             // Trata erros de serialização ou outros erros
             await DisplayAlert("Erro", "Não foi possível exibir sua imagem de perfil.", "OK");

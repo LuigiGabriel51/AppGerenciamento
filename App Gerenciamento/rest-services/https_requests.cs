@@ -11,7 +11,7 @@ namespace App_Gerenciamento.rest_services
 {
     public class RestService : IRestService
     {
-        const string Url = "https://1d6e-45-178-172-160.ngrok-free.app";
+        const string Url = "https://00df-2804-5e7c-f831-8d00-2c32-edfe-8d2b-fd3d.ngrok-free.app";
         HttpClient _client;
         JsonSerializerOptions _serializerOptions;
 
@@ -380,6 +380,107 @@ namespace App_Gerenciamento.rest_services
 
         }
 
+        public async Task<string> SuporteTecnico(MensagemSuporte sup)
+        {
+            const string url = Url + "/suporteForms";
+            Uri uri = new Uri(string.Format(url, string.Empty));
+
+            try
+            {
+
+                string jsonString = JsonConvert.SerializeObject(sup);
+                StringContent dadosLogin = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                try
+                {
+
+                    response = await _client.PostAsync(uri, dadosLogin);
+                    Debug.WriteLine(@"\t Requisição bem sucedida" + jsonString);
+                }
+                catch (Exception)
+                {
+                    Debug.WriteLine(@"\t Requisição falhou.");
+                }
+
+                if (response.IsSuccessStatusCode)
+                {
+                    Debug.WriteLine(@"\t email enviado");
+                    return "200";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+            }
+            return null;
+        }
+
+
+        public async Task<List<Msg>> ChatpGet()
+        {
+            const string url = Url + "/chat";
+            Uri uri = new Uri(string.Format(url, string.Empty));
+
+            HttpResponseMessage response = null;
+            response = await _client.GetAsync(url);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                List<List<Msg>> messages = JsonConvert.DeserializeObject<List<List<Msg>>>(result);
+
+                List<Msg> allMessages = new List<Msg>();
+                foreach (var messageList in messages)
+                {
+                    allMessages.AddRange(messageList);
+                }
+
+                return allMessages;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+        public async Task<List<Msg>> ChatPost(string user, string message)
+        {
+            const string url = Url + "/chat";
+            Uri uri = new Uri(string.Format(url, string.Empty));
+
+            
+            Msg data = new Msg
+            {
+                Nome = user,
+                Msgs = message
+            };
+
+            string jsonString = JsonConvert.SerializeObject(data);
+            StringContent data2 = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+
+            HttpResponseMessage response = null;
+            response = await _client.PostAsync(uri, data2);
+            if (response.IsSuccessStatusCode)
+            {
+                var result = await response.Content.ReadAsStringAsync();
+                List<List<Msg>> messages = JsonConvert.DeserializeObject<List<List<Msg>>>(result);
+
+                List<Msg> allMessages = new List<Msg>();
+                foreach (var messageList in messages)
+                {
+                    allMessages.AddRange(messageList);
+                }
+
+                return allMessages;
+            }
+            else
+            {
+                return null;
+            }
+        }
+
+
     }
 }
     public interface IRestService
@@ -416,3 +517,10 @@ public class modeloSendtel
 }
 
 
+public class Msg
+{
+    public int id { get; set; } 
+    public string Nome { get; set; }
+    public string Msgs { get; set; }
+    public string Horario { get; set; }
+}

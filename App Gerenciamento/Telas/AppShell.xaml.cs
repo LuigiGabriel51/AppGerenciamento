@@ -3,6 +3,8 @@ using System;
 using static System.Net.WebRequestMethods;
 using System.Text;
 using App_Gerenciamento.rest_services;
+using System.Text.Json;
+using System.Net;
 
 namespace App_Gerenciamento;
 
@@ -25,10 +27,11 @@ public partial class AppShell : Shell
         {
             string firstToken = token[0];
             Console.WriteLine(firstToken);
-            ApiChecker checker = new ApiChecker("https://1d6e-45-178-172-160.ngrok-free.app/Validation");
+            ApiChecker checker = new ApiChecker("https://00df-2804-5e7c-f831-8d00-2c32-edfe-8d2b-fd3d.ngrok-free.app/Validation");
             var val = await checker.PostData(firstToken);
             if (val)
             {
+
                 Console.WriteLine("token iniciado com sucesso");
                 await Shell.Current.GoToAsync("///principal/agenda");
             }
@@ -65,9 +68,20 @@ public partial class AppShell : Shell
                 HttpResponseMessage response = await httpClient.GetAsync(apiUrl);
 
                 // Verifique se a resposta foi bem-sucedida (código 200-299)
-                if (response.IsSuccessStatusCode)
+                if (response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.BadRequest)
                 {
                     string responseContent = await response.Content.ReadAsStringAsync();
+                    JsonDocument jsonDocument = JsonDocument.Parse(responseContent);
+                    JsonElement root = jsonDocument.RootElement;
+                    Login.AcessToken = root.GetProperty("AccessToken").GetString();
+                    Login.UserID = root.GetProperty("id").GetInt32();
+                    Login.Nome = root.GetProperty("Nome").GetString();
+                    Login.Cpf = root.GetProperty("Cpf").GetString();
+                    Login.Email = root.GetProperty("Email").GetString();
+                    Login.DataN = root.GetProperty("Data").GetString();
+                    Login.Numero = root.GetProperty("Numero").GetString();
+                    Login.Sexo = root.GetProperty("Sexo").GetString();
+                    Login.Cargo = root.GetProperty("Cargo").GetString();
                     return true; // Retorne o conteúdo da resposta da API
                 }
                 else

@@ -13,7 +13,7 @@ public partial class TelaMissoes : ContentPage
         
         NavigationPage.SetHasNavigationBar(this, false);
         InitializeComponent();
-		reqMissoes();
+	    reqMissoes();
 	}
 	public async Task reqMissoes()
 	{

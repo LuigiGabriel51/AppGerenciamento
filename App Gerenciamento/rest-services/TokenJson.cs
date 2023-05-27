@@ -18,8 +18,8 @@ namespace App_Gerenciamento.rest_services
             // Certifica-se de que o diretório exista
             Directory.CreateDirectory(modelFolderPath);
 
-            filePath = Path.Combine(modelFolderPath, "jsonToken.json");
-            this.filePath = filePath;
+            this.filePath = Path.Combine(modelFolderPath, "jsonToken.json");
+            
         }
 
         public void AddToken(string token)

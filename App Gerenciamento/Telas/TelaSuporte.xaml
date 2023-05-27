@@ -84,25 +84,42 @@
                             <Frame BackgroundColor="#EEE0E5" HeightRequest="300" Padding="0" x:Name="frameAD" IsVisible="false" BorderColor="Black" >
                                 <StackLayout BackgroundColor="Transparent" HeightRequest="300">
                                     <Frame Padding="0" WidthRequest="280" HeightRequest="50" BackgroundColor="#B5B5B5" BorderColor="Black" 
-                                       >
-                                        <Label Text="Assitente Digital" TextColor="Black" BackgroundColor="Transparent"
+                                      Margin="0,0,0,0"  >
+                                    <Label Text="Chat Geral" TextColor="Black" BackgroundColor="Transparent"
                                        HorizontalOptions="Center" VerticalOptions="Center" FontAttributes="Bold" FontSize="15"/>
-                                        <Frame.Shadow>
-                                            <Shadow Brush="black"
-                                                Offset="40,40"
-                                                Radius="40"
-                                                Opacity="0.8"></Shadow>
-                                        </Frame.Shadow>
 
-                                    </Frame>
+                                </Frame>
+
+                                <ScrollView x:Name="scrollView" BackgroundColor="Transparent">
+                                    <ListView BackgroundColor="Transparent" x:Name="listMSG" SelectionMode="None" HasUnevenRows="True" HeightRequest="200">
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <ViewCell x:Name="vc">
+                                                
+                                                        <VerticalStackLayout Padding="10">
+                                                            <Label Text="{Binding Nome}" Margin="0,0,0,0" TextColor="Purple"/>
+                                                            <Label Text="{Binding Msgs}" TextColor="Black" HorizontalOptions="Start"
+                                                                       VerticalOptions="Center" FontSize="16"/>
+                                                            <Label Text="{Binding Horario}" FontSize="8" HorizontalOptions="End"/>
+                                                        </VerticalStackLayout>
+                                                
+                                                </ViewCell>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </ScrollView>
                                 <Frame VerticalOptions="EndAndExpand" HeightRequest="40" BackgroundColor="#FFEC8B" BorderColor="Transparent" Padding="0">
-
-                                    <HorizontalStackLayout WidthRequest="280">
-                                        
-                                        <Editor Placeholder="Mensagem" PlaceholderColor="Black" VerticalOptions="Center"
-                                                TextColor="Black" WidthRequest="220" Margin="10,0,0,0"/>
+                                    
+                                    
+                                    <HorizontalStackLayout WidthRequest="280" BackgroundColor="Transparent">
+                                        <ScrollView>
+                                            <Editor Placeholder="Mensagem" PlaceholderColor="Black" VerticalOptions="Center"
+                                                TextColor="Black" WidthRequest="220" Margin="10,0,0,0" x:Name="Mensagem" 
+                                                TextChanged="Mensagem_TextChanged"/>
+                                        </ScrollView>
                                         <Button WidthRequest="50" HeightRequest="40" HorizontalOptions="EndAndExpand" FontSize="25"
-                                                Text="➤" Padding="0" BackgroundColor="Transparent"/>
+                                                Text="➤" Padding="0" BackgroundColor="Transparent" Clicked="Button_Clicked_3"
+                                                TextColor="#BEBEBE" IsEnabled="False" x:Name="enviar" />
 
                                     </HorizontalStackLayout>
                                     

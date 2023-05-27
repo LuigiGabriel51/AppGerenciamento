@@ -1,4 +1,9 @@
-﻿namespace App_Gerenciamento.Telas;
+﻿using App_Gerenciamento.rest_services;
+using Microsoft.Maui.Controls;
+using Microsoft.Maui.Controls.Internals;
+using System.Collections;
+
+namespace App_Gerenciamento.Telas;
 
 public partial class TelaSuporte : ContentPage
 {
@@ -75,7 +80,7 @@ public partial class TelaSuporte : ContentPage
                 }
         return listFAQ;
     }
-
+    [Obsolete]
     private void btCarta_Clicked(object sender, EventArgs e)
     {
         if(bt1 == false)
@@ -93,9 +98,9 @@ public partial class TelaSuporte : ContentPage
             frameCarta.IsVisible = false;
         }
     }
-        
 
-    private void btCarta_Clicked2(object sender, EventArgs e)
+    [Obsolete]
+    private async void btCarta_Clicked2(object sender, EventArgs e)
     {
         if(bt2 == false)
         {
@@ -119,16 +124,70 @@ public partial class TelaSuporte : ContentPage
         MensagemSuporte requisicao = new MensagemSuporte {
             nome = nome.Text,
             email = email.Text,
-            telefone = telefone.Text,
+            tel = telefone.Text,
             cargo = cargo.SelectedItem.ToString(),
             motivo = motivo.SelectedItem.ToString(),
-            descricao = msg.Text
+            mensagem = msg.Text
             
         };
+        RestService rest = new RestService();
+        await rest.SuporteTecnico(requisicao);
+        await DisplayAlert("Suporte Tecnico", "Seu Formulário foi enviado para um email da Empresa, entraremos em contato para resolver o problema o mais rápido possível", "ok");
+        nome.Text = null;
+        email.Text = null;
+        telefone.Text = null;
+        cargo.SelectedItem = null;
+        motivo.SelectedItem = null;
+        msg.Text = null;
+    }
 
+    private async void Button_Clicked_3(object sender, EventArgs e)
+    {
+        
+        RestService rest = new RestService();
+        await rest.ChatPost(Login.Nome, Mensagem.Text);
+        Mensagem.Text = null;
+        var msgs = await rest.ChatpGet();
+        listMSG.ItemsSource = msgs;
+        if (msgs.Count > 0)
+        {
+            var lastMsg = msgs[msgs.Count - 1];
+            listMSG.ScrollTo(lastMsg, ScrollToPosition.End, false);
+        }
 
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        RestService rest = new RestService();
+        var msgs = await rest.ChatpGet();
+        listMSG.ItemsSource = msgs;
+        if (msgs.Count > 0)
+        {
+            var lastMsg = msgs[msgs.Count - 1];
+            listMSG.ScrollTo(lastMsg, ScrollToPosition.End, false);
+        }
+    }
+
+    private void Mensagem_TextChanged(object sender, TextChangedEventArgs e)
+    {
+
+        if (!string.IsNullOrWhiteSpace(Mensagem.Text))
+        {
+            enviar.TextColor = Color.FromArgb("#A020F0");
+            enviar.IsEnabled = true;
+        }
+        else
+        {
+            enviar.TextColor = Color.FromArgb("#BEBEBE");
+            enviar.IsEnabled = false;
+        }
+    }
+
 }
+
+
 public class MSGfaq
 {
     public string pergunta { get; set; }
@@ -138,8 +197,8 @@ public class MensagemSuporte
 {
     public string nome { get; set; }
     public string email { get; set; }
-    public string telefone { get; set; }
+    public string tel { get; set; }
     public string cargo { get; set; }
     public string motivo { get; set; }
-    public string descricao { get; set;}
+    public string mensagem { get; set;}
 }
