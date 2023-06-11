@@ -1,8 +1,9 @@
-using App_Gerenciamento.rest_services;
 using Newtonsoft.Json;
 using System.Text;
 using System.Diagnostics;
 using Microsoft.Maui.Controls;
+using App_Gerenciamento.Models;
+using App_Gerenciamento.ViewModel;
 
 namespace App_Gerenciamento.Telas;
 
@@ -13,8 +14,7 @@ public partial class TelaUser : ContentPage
 	{
         NavigationPage.SetHasNavigationBar(this, false);
         InitializeComponent();
-        updateDados();
-        UpdateImage();
+        BindingContext = new PageUserInfoVM();
 	}
 
     private async void Button_Clicked(object sender, EventArgs e)
@@ -33,26 +33,33 @@ public partial class TelaUser : ContentPage
 
         if (logout == true) {
             var loginPage = new LoginPage();
+            img.Source = "perfil.png";
             Login.Cpf = null;
+            TokenManager tokenManager = new TokenManager();
+            List<string> token = tokenManager.GetTokens();
+            if (token.Count > 0)
+            {
+                string firstToken = token[0];
+                Console.WriteLine(firstToken);
+                tokenManager.RemoveToken(firstToken);
+            }
             await Shell.Current.GoToAsync("//login");
         }
     }
-    public void updateDados()
-    {
-        nome.Text =  Login.Nome;
-        cpf.Text = Login.Cpf;
-        dNascimento.Text = Login.DataN;
-        telefone.Text = Login.Numero;
-        sexo.Text = Login.Sexo;
-        cargo.Text = Login.Cargo;
-        email.Text = Login.Email;
 
-        
+    protected async override void OnAppearing()
+    {
+        base.OnAppearing();
+        if (BindingContext is PageUserInfoVM viewmodel)
+        {
+            await UpdateImage();
+            viewmodel.getInfoUser.Execute(null);
+        }
     }
 
     public async Task UpdateImage()
     {
-        const string Url = "https://00df-2804-5e7c-f831-8d00-2c32-edfe-8d2b-fd3d.ngrok-free.app/sendImagePerfil";
+        const string Url = "https://1db5-2804-5e7c-f831-8d00-2def-8216-48bf-f843.ngrok-free.app/sendImagePerfil";
         try
         {
             modeloLogin pessoa = new modeloLogin

@@ -1,4 +1,4 @@
-using App_Gerenciamento.rest_services;
+using App_Gerenciamento.Models;
 
 namespace App_Gerenciamento.Telas;
 

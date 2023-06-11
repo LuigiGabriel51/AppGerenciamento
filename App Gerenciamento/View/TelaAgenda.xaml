@@ -2,9 +2,12 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Gerenciamento.Telas.TelaAgenda"
-             BackgroundColor="#FFEC8B" >
+             BackgroundColor="#FFEC8B" xmlns:local="clr-namespace:App_Gerenciamento.ViewModel">
+    <ContentPage.BindingContext>
+        <local:PageAgendaVM/>
+    </ContentPage.BindingContext>
     
-    <VerticalStackLayout >
+    <VerticalStackLayout>
         <Image Source="logoprincipal.png" HeightRequest="90" HorizontalOptions="End" Margin="0,60,30,20"/>
        
         <HorizontalStackLayout WidthRequest="300" Margin="0,50,0,0" Spacing="30" HorizontalOptions="End">
@@ -20,7 +23,7 @@
                HorizontalOptions="Center" TextDecorations="Underline" WidthRequest="300"/>
         <Frame x:Name="eventos" Margin="0,20,0,0" WidthRequest="300" BorderColor="#A020F0" HeightRequest="300" IsVisible="false">
             <ListView x:Name="listAgenda" ItemSelected="listAgenda_ItemSelected" 
-                      BackgroundColor="Transparent" RowHeight="85">
+                      BackgroundColor="Transparent" RowHeight="85" ItemsSource="{Binding Servicos}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>

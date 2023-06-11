@@ -1,4 +1,5 @@
-using App_Gerenciamento.rest_services;
+using App_Gerenciamento.Models;
+using App_Gerenciamento.ViewModel;
 using System.ComponentModel;
 using System.Diagnostics;
 
@@ -11,8 +12,7 @@ namespace App_Gerenciamento.Telas
         {
             NavigationPage.SetHasNavigationBar(this, false);
             InitializeComponent();        
-            BindingContext = new MyViewModel();
-            InicializaAgenda();
+            BindingContext = new PageAgendaVM();
         }
         private async void DatePicker_DateSelected(object sender, DateChangedEventArgs e)
         {
@@ -30,17 +30,6 @@ namespace App_Gerenciamento.Telas
                 listAgenda.ItemsSource = null;
                 infoData.Text = "Não há compromissos marcados para essa data";
                 eventos.IsVisible = false;
-            }
-        }
-
-        public async void InicializaAgenda()
-        {
-            string dData;
-            dData = DateTime.Now.ToString("dd/MM/yyyy");
-            var compromissos = await restService.RequestAgenda(dData);
-            if (compromissos != null)
-            {
-                listAgenda.ItemsSource = compromissos;
             }
         }
 
@@ -65,32 +54,4 @@ namespace App_Gerenciamento.Telas
 
     }
 
-    public class MyViewModel : INotifyPropertyChanged
-    {
-        private string _data;
-        public string Data
-        {
-            get { return _data; }
-            set
-            {
-                if (_data != value)
-                {
-                    _data = value;
-                    OnPropertyChanged(nameof(Data));
-                }
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        protected void OnPropertyChanged(string propertyName)
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
-
-        public MyViewModel()
-        {
-            Data = DateTime.Now.ToString("dd/MM/yyyy");
-        }
-    }
 }

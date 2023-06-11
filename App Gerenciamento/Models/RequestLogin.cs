@@ -1,17 +1,15 @@
-﻿
-using App_Gerenciamento.Telas;
+﻿using App_Gerenciamento.Telas;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using System.Diagnostics;
 using System.Net;
 using System.Text;
 using System.Text.Json;
 
-namespace App_Gerenciamento.rest_services
+namespace App_Gerenciamento.Models
 {
     public class RestService : IRestService
     {
-        const string Url = "https://00df-2804-5e7c-f831-8d00-2c32-edfe-8d2b-fd3d.ngrok-free.app";
+        const string Url = "https://1db5-2804-5e7c-f831-8d00-2def-8216-48bf-f843.ngrok-free.app";
         HttpClient _client;
         JsonSerializerOptions _serializerOptions;
 
@@ -43,13 +41,13 @@ namespace App_Gerenciamento.rest_services
                 try
                 {
                     response = await _client.PostAsync(uri, dadosLogin);
-                    Debug.WriteLine(@"\t Requisição bem sucedida");
+                    Console.WriteLine(@"\t Requisição bem sucedida");
                 }
-                catch (Exception) { Debug.WriteLine(@"\t Requisição falhou."); }
+                catch (Exception) { Console.WriteLine(@"\t Requisição falhou."); }
 
                 if (response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.BadRequest)
                 {
-                    Debug.WriteLine(@"\tLogin feito");
+                    Console.WriteLine(@"\tLogin feito");
                     string jsonResponse = await response.Content.ReadAsStringAsync();
                     JsonDocument jsonDocument = JsonDocument.Parse(jsonResponse);
                     JsonElement root = jsonDocument.RootElement;
@@ -63,15 +61,15 @@ namespace App_Gerenciamento.rest_services
                     Login.Sexo = root.GetProperty("Sexo").GetString();
                     Login.Cargo = root.GetProperty("Cargo").GetString();
 
-                    Debug.WriteLine(@"\" + Login.AcessToken);
+                    Console.WriteLine(@"\" + Login.AcessToken);
                     return true;
                 }
 
 
-                }
+            }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return false;
 
@@ -95,16 +93,16 @@ namespace App_Gerenciamento.rest_services
                 {
 
                     response = await _client.PostAsync(uri, dadosLogin);
-                    Debug.WriteLine(@"\t Requisição bem sucedida"+jsonString);
+                    Console.WriteLine(@"\t Requisição bem sucedida" + jsonString);
                 }
                 catch (Exception)
                 {
-                    Debug.WriteLine(@"\t Requisição falhou.");
+                    Console.WriteLine(@"\t Requisição falhou.");
                 }
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine(@"\t email ou telefone recebido");
+                    Console.WriteLine(@"\t email ou telefone recebido");
                     string jsonResponse = await response.Content.ReadAsStringAsync();
                     JsonDocument jsonDocument = JsonDocument.Parse(jsonResponse);
                     JsonElement root = jsonDocument.RootElement;
@@ -115,7 +113,7 @@ namespace App_Gerenciamento.rest_services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return null;
         }
@@ -140,14 +138,14 @@ namespace App_Gerenciamento.rest_services
                 try
                 {
                     response = await _client.PostAsync(uri, dadosLogin);
-                    Debug.WriteLine(@"\t Requisição bem sucedida");
+                    Console.WriteLine(@"\t Requisição bem sucedida");
                 }
-                catch (Exception) { Debug.WriteLine(@"\t Requisição falhou."); }
+                catch (Exception) { Console.WriteLine(@"\t Requisição falhou."); }
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine(@"\tcodigo enviado");
-                    
+                    Console.WriteLine(@"\tcodigo enviado");
+
                     return true;
                 }
 
@@ -155,7 +153,7 @@ namespace App_Gerenciamento.rest_services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return false;
 
@@ -181,13 +179,13 @@ namespace App_Gerenciamento.rest_services
                 try
                 {
                     response = await _client.PostAsync(uri, dadosLogin);
-                    Debug.WriteLine(@"\t Requisição bem sucedida");
+                    Console.WriteLine(@"\t Requisição bem sucedida");
                 }
-                catch (Exception) { Debug.WriteLine(@"\t Requisição falhou."); }
+                catch (Exception) { Console.WriteLine(@"\t Requisição falhou."); }
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine(@"\tcodigo enviado");
+                    Console.WriteLine(@"\tcodigo enviado");
 
                     return true;
                 }
@@ -196,7 +194,7 @@ namespace App_Gerenciamento.rest_services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return false;
 
@@ -212,7 +210,7 @@ namespace App_Gerenciamento.rest_services
             {
                 modeloLogin pessoa = new modeloLogin
                 {
-                    cpf =  cpf,
+                    cpf = cpf,
                     senha = SENHA
                 };
                 string json = JsonConvert.SerializeObject(pessoa);
@@ -222,13 +220,13 @@ namespace App_Gerenciamento.rest_services
                 try
                 {
                     response = await _client.PostAsync(uri, dadosLogin);
-                    Debug.WriteLine(@"\t Requisição bem sucedida");
+                    Console.WriteLine(@"\t Requisição bem sucedida");
                 }
-                catch (Exception) { Debug.WriteLine(@"\t Requisição falhou."); }
+                catch (Exception) { Console.WriteLine(@"\t Requisição falhou."); }
 
                 if (response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.BadRequest)
                 {
-                    Debug.WriteLine(@"\tSenha Alterada com Sucesso");
+                    Console.WriteLine(@"\tSenha Alterada com Sucesso");
                     return true;
                 }
 
@@ -236,7 +234,7 @@ namespace App_Gerenciamento.rest_services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return false;
 
@@ -247,7 +245,7 @@ namespace App_Gerenciamento.rest_services
         {
             const string url = Url + "/Agenda";
             Uri uri = new Uri(string.Format(url, string.Empty));
-            Debug.WriteLine("asxsasxsxasxsax        "+data);
+            Console.WriteLine("asxsasxsxasxsax        " + data);
             try
             {
                 modeloLogin pessoa = new modeloLogin
@@ -262,11 +260,11 @@ namespace App_Gerenciamento.rest_services
                 {
 
                     response = await _client.PostAsync(uri, dadosAgenda);
-                    Debug.WriteLine(@"\t Requisição bem sucedida");
+                    Console.WriteLine(@"\t Requisição bem sucedida");
                 }
                 catch (Exception)
                 {
-                    Debug.WriteLine(@"\t Requisição falhou.");
+                    Console.WriteLine(@"\t Requisição falhou.");
                 }
 
                 if (response.IsSuccessStatusCode)
@@ -284,7 +282,7 @@ namespace App_Gerenciamento.rest_services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return new List<Servicos>();
         }
@@ -361,12 +359,12 @@ namespace App_Gerenciamento.rest_services
                 try
                 {
                     response = await _client.PostAsync(uri, dadosLogin);
-                    Debug.WriteLine(@"\t Requisição bem sucedida");
+                    Console.WriteLine(@"\t Requisição bem sucedida");
                 }
-                catch (Exception) { Debug.WriteLine(@"\t Requisição falhou."); }
+                catch (Exception) { Console.WriteLine(@"\t Requisição falhou."); }
 
                 if (response.IsSuccessStatusCode && response.StatusCode != HttpStatusCode.BadRequest)
-                { 
+                {
                     return true;
                 }
 
@@ -374,7 +372,7 @@ namespace App_Gerenciamento.rest_services
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return false;
 
@@ -396,22 +394,22 @@ namespace App_Gerenciamento.rest_services
                 {
 
                     response = await _client.PostAsync(uri, dadosLogin);
-                    Debug.WriteLine(@"\t Requisição bem sucedida" + jsonString);
+                    Console.WriteLine(@"\t Requisição bem sucedida" + jsonString);
                 }
                 catch (Exception)
                 {
-                    Debug.WriteLine(@"\t Requisição falhou.");
+                    Console.WriteLine(@"\t Requisição falhou.");
                 }
 
                 if (response.IsSuccessStatusCode)
                 {
-                    Debug.WriteLine(@"\t email enviado");
+                    Console.WriteLine(@"\t email enviado");
                     return "200";
                 }
             }
             catch (Exception ex)
             {
-                Debug.WriteLine(@"\tERROR {0}", ex.Message);
+                Console.WriteLine(@"\tERROR {0}", ex.Message);
             }
             return null;
         }
@@ -448,7 +446,7 @@ namespace App_Gerenciamento.rest_services
             const string url = Url + "/chat";
             Uri uri = new Uri(string.Format(url, string.Empty));
 
-            
+
             Msg data = new Msg
             {
                 Nome = user,
@@ -480,16 +478,56 @@ namespace App_Gerenciamento.rest_services
             }
         }
 
+        public async Task<Byte[]> UpdateImage()
+        {
+            const string url = Url + "/sendImagePerfil";
+            Uri uri = new Uri(string.Format(url, string.Empty));
+            try
+            {
+                modeloLogin pessoa = new modeloLogin
+                {
+                    id = Login.UserID,
+                };
+                string jsonString = JsonConvert.SerializeObject(pessoa);
+                StringContent dadosLogin = new StringContent(jsonString, Encoding.UTF8, "application/json");
+
+                HttpResponseMessage response = null;
+                try
+                {
+                    var client = new HttpClient();
+                    response = await client.PostAsync(uri, dadosLogin);
+
+                    
+                    response.EnsureSuccessStatusCode();
+
+                    
+                    var imageBytes = await response.Content.ReadAsByteArrayAsync();
+
+                    return imageBytes;
+                }
+                catch (Exception)
+                {
+                    Console.WriteLine(@"\t Requisição falhou.");
+                    return null;
+                }
+            }
+            catch (Exception)
+            {
+                // Trata erros de serialização ou outros erros
+                return null;
+            }
+        }
+
 
     }
 }
-    public interface IRestService
-    {
-    }
+public interface IRestService
+{
+}
 
 public class modeloLogin
 {
-    public int id { get; set; } 
+    public int id { get; set; }
     public string email { get; set; }
     public string cpf { get; set; }
     public string senha { get; set; }
@@ -519,8 +557,9 @@ public class modeloSendtel
 
 public class Msg
 {
-    public int id { get; set; } 
+    public int id { get; set; }
     public string Nome { get; set; }
     public string Msgs { get; set; }
     public string Horario { get; set; }
+
 }

@@ -4,11 +4,12 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Gerenciamento.rest_services
+namespace App_Gerenciamento.Models
 {
 
-    public class Login{
-        public static int UserID {  get; set; }
+    public class Login
+    {
+        public static int UserID { get; set; }
         public static string AcessToken { get; set; }
         public static string Nome { get; set; }
         public static string Cpf { get; set; }
@@ -26,7 +27,7 @@ namespace App_Gerenciamento.rest_services
 
     public class Servicos
     {
-        public string Nome { get; set ; }
+        public string Nome { get; set; }
         public string dia { get; set; }
         public string horario { get; set; }
         public string descricao { get; set; }
@@ -38,7 +39,8 @@ namespace App_Gerenciamento.rest_services
         public List<Fases> fases { get; set; }
 
     }
-    public class Fases {
+    public class Fases
+    {
         public int id { get; set; }
         public int pertencente { get; set; }
         public string nome { get; set; }

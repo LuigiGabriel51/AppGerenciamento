@@ -2,9 +2,9 @@
 using System;
 using static System.Net.WebRequestMethods;
 using System.Text;
-using App_Gerenciamento.rest_services;
 using System.Text.Json;
 using System.Net;
+using App_Gerenciamento.Models;
 
 namespace App_Gerenciamento;
 
@@ -27,7 +27,7 @@ public partial class AppShell : Shell
         {
             string firstToken = token[0];
             Console.WriteLine(firstToken);
-            ApiChecker checker = new ApiChecker("https://00df-2804-5e7c-f831-8d00-2c32-edfe-8d2b-fd3d.ngrok-free.app/Validation");
+            ApiChecker checker = new ApiChecker("https://1db5-2804-5e7c-f831-8d00-2def-8216-48bf-f843.ngrok-free.app/Validation");
             var val = await checker.PostData(firstToken);
             if (val)
             {

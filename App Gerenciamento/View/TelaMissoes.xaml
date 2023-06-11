@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="App_Gerenciamento.Telas.TelaMissoes" BackgroundColor="#FFEC8B">
+             x:Class="App_Gerenciamento.Telas.TelaMissoes" BackgroundColor="#FFEC8B"
+             xmlns:data="clr-namespace:App_Gerenciamento.ViewModel">
+    <ContentPage.BindingContext>
+        <data:PageMissoesVM/>
+    </ContentPage.BindingContext>
     <AbsoluteLayout>
 
         <Frame AbsoluteLayout.LayoutBounds="50,100,250,40" Padding="0" CornerRadius="2" BackgroundColor="Transparent">
@@ -12,7 +16,7 @@
         <Frame AbsoluteLayout.LayoutBounds="20,150,350,550" BackgroundColor="Transparent" 
                HasShadow="False"
                BorderColor="Transparent">
-            <ListView BackgroundColor="Transparent" x:Name="p_list" RowHeight="100" 
+            <ListView BackgroundColor="Transparent" x:Name="p_list" ItemsSource="{Binding Projetos}" RowHeight="100" 
                       ItemSelected="p_list_ItemSelected" VerticalScrollBarVisibility="Never"
                       SelectionMode="Single" HasUnevenRows="True" SeparatorVisibility="None" 
                       >

@@ -57,41 +57,42 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <PackageReference Include="CommunityToolkit.Mvvm" Version="8.2.0" />
 	  <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="Telas\TelaAgenda.xaml.cs">
+	  <Compile Update="View\TelaAgenda.xaml.cs">
 	    <DependentUpon>TelaAgenda.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
 	<ItemGroup>
-	  <MauiXaml Update="Telas\LoginPage.xaml">
+	  <MauiXaml Update="View\LoginPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Telas\NovaSenhaUser.xaml">
+	  <MauiXaml Update="View\NovaSenhaUser.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Telas\PageUpdateData.xaml">
+	  <MauiXaml Update="View\PageUpdateData.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Telas\TelaMissoes.xaml">
+	  <MauiXaml Update="View\TelaMissoes.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Telas\TelaNVsenha.xaml">
+	  <MauiXaml Update="View\TelaNVsenha.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Telas\TelaAgenda.xaml">
+	  <MauiXaml Update="View\TelaAgenda.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Telas\PageRecuperacao.xaml">
+	  <MauiXaml Update="View\PageRecuperacao.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Telas\TelaSuporte.xaml">
+	  <MauiXaml Update="View\TelaSuporte.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Telas\TelaUser.xaml">
+	  <MauiXaml Update="View\TelaUser.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

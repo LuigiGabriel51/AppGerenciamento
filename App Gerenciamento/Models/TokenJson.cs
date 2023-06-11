@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace App_Gerenciamento.rest_services
+namespace App_Gerenciamento.Models
 {
     public class TokenManager
     {
@@ -18,8 +18,8 @@ namespace App_Gerenciamento.rest_services
             // Certifica-se de que o diretório exista
             Directory.CreateDirectory(modelFolderPath);
 
-            this.filePath = Path.Combine(modelFolderPath, "jsonToken.json");
-            
+            filePath = Path.Combine(modelFolderPath, "jsonToken.json");
+
         }
 
         public void AddToken(string token)

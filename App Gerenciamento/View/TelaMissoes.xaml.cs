@@ -1,4 +1,5 @@
-using App_Gerenciamento.rest_services;
+using App_Gerenciamento.Models;
+using App_Gerenciamento.ViewModel;
 using Microsoft.Maui.Animations;
 using System.Collections.Generic;
 
@@ -13,12 +14,8 @@ public partial class TelaMissoes : ContentPage
         
         NavigationPage.SetHasNavigationBar(this, false);
         InitializeComponent();
-	    reqMissoes();
+        BindingContext = new PageMissoesVM();
 	}
-	public async Task reqMissoes()
-	{
-		p_list.ItemsSource = await restService.requestProjetos();
-    }
 
     private void p_list_ItemSelected(object sender, SelectedItemChangedEventArgs e)
     {
@@ -76,8 +73,13 @@ public partial class TelaMissoes : ContentPage
         {
             Console.WriteLine(ex.Message);
         }
-
-
-
+    }
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+        if(BindingContext is PageMissoesVM viewmodel)
+        {
+            viewmodel.getProjetos.Execute(null);
+        }
     }
 }

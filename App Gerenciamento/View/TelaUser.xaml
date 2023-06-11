@@ -2,27 +2,33 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="App_Gerenciamento.Telas.TelaUser"
-             BackgroundColor="#FFEC8B">
+             BackgroundColor="#FFEC8B" xmlns:local="clr-namespace:App_Gerenciamento.ViewModel">
+    <ContentPage.BindingContext>
+        <local:PageUserInfoVM/>
+    </ContentPage.BindingContext>
     <VerticalStackLayout Margin="0,20,0,0" Spacing="20">
+
+        
+
         <Frame WidthRequest="130" HeightRequest="130" CornerRadius="70" HasShadow="True" Padding="-20"  BorderColor="Transparent">
             <Image x:Name="img" Source="perfil.png" Aspect="AspectFill" Margin="0,0,0,0" HorizontalOptions="Center"/>
         </Frame>
         
         
-        <Label x:Name="nome" FontSize="14" FontAttributes="Bold"
-               TextColor="Black" HorizontalOptions="CenterAndExpand"
-               WidthRequest="180" LineBreakMode="TailTruncation" BackgroundColor="Transparent"/>
+        <Label Text="{Binding Nome}" FontSize="16" FontAttributes="Bold"
+               TextColor="Black" HorizontalOptions="Center"
+               LineBreakMode="TailTruncation" BackgroundColor="Transparent"/>
         
         <StackLayout Orientation="Horizontal"  HorizontalOptions="Center" Spacing="40" HeightRequest="40" Margin="20,0,0,0">
             <VerticalStackLayout HeightRequest="40" BackgroundColor="Transparent">
                 <Label Text="CPF" FontSize="10" TextColor="Silver"/>
-                <Label x:Name="cpf" FontSize="14" TextColor="Black" HorizontalOptions="Start" 
+                <Label Text="{Binding Cpf}" FontSize="14" TextColor="Black" HorizontalOptions="Start" 
                    Margin="0,0,0,0" WidthRequest="130" BackgroundColor="Transparent"  FontAttributes="Bold"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout HeightRequest="40" BackgroundColor="Transparent">
                 <Label Text="Data de Nascimento" FontSize="10" TextColor="Silver"/>
-                <Label x:Name="dNascimento" FontSize="14" TextColor="Black" HorizontalOptions="End"
+                <Label Text="{Binding DataN}" FontSize="14" TextColor="Black" HorizontalOptions="End"
                    Margin="0,0,0,0" WidthRequest="130" BackgroundColor="Transparent"  FontAttributes="Bold"/>
             </VerticalStackLayout>
             
@@ -30,27 +36,27 @@
         <StackLayout Orientation="Horizontal"  HorizontalOptions="Center" Spacing="40" Margin="20,0,0,0">
             <VerticalStackLayout HeightRequest="40" BackgroundColor="Transparent">
                 <Label Text="Telefone" FontSize="10" TextColor="Silver"/>
-                <Label x:Name="telefone" FontSize="14" TextColor="Black" Margin="0,0,0,0" 
+                <Label Text="{Binding Numero}" FontSize="14" TextColor="Black" Margin="0,0,0,0" 
                    WidthRequest="130" BackgroundColor="Transparent"  FontAttributes="Bold"/>
             </VerticalStackLayout>
 
             <VerticalStackLayout HeightRequest="40" BackgroundColor="Transparent">
                 <Label Text="Gênero" FontSize="10" TextColor="Silver"/>
-                <Label x:Name="sexo" FontSize="14" TextColor="Black" 
+                <Label Text="{Binding Sexo}" FontSize="14" TextColor="Black" 
                    Margin="0,0,0,0" WidthRequest="130" BackgroundColor="Transparent"  FontAttributes="Bold"/>
             </VerticalStackLayout>
             
         </StackLayout>
         <VerticalStackLayout WidthRequest="250" HeightRequest="40" BackgroundColor="Transparent">
-            <Label Text="Gênero" FontSize="10" TextColor="Silver" HorizontalOptions="Center" Margin="0,0,0,0"/>
-            <Label x:Name="cargo" HorizontalOptions="Center" 
+            <Label Text="Cargo" FontSize="10" TextColor="Silver" HorizontalOptions="Center" Margin="0,0,0,0"/>
+            <Label Text="{Binding Cargo}" HorizontalOptions="Center" 
                FontSize="14" TextColor="Black" 
                Margin="0,0,0,0"  FontAttributes="Bold"/>
         </VerticalStackLayout>
 
         <VerticalStackLayout WidthRequest="250" HeightRequest="40" BackgroundColor="Transparent">
-            <Label Text="Gênero" FontSize="10" TextColor="Silver" HorizontalOptions="Center" Margin="0,0,0,0"/>
-            <Label x:Name="email"  HorizontalOptions="Center" 
+            <Label Text="Email" FontSize="10" TextColor="Silver" HorizontalOptions="Center" Margin="0,0,0,0"/>
+            <Label Text="{Binding Email}" HorizontalOptions="Center" 
                FontSize="14" TextColor="Black"  BackgroundColor="Transparent"  FontAttributes="Bold"/>
         </VerticalStackLayout>
         

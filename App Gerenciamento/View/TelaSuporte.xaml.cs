@@ -1,4 +1,5 @@
-﻿using App_Gerenciamento.rest_services;
+﻿using App_Gerenciamento.Models;
+using App_Gerenciamento.ViewModel;
 using Microsoft.Maui.Controls;
 using Microsoft.Maui.Controls.Internals;
 using System.Collections;
@@ -14,7 +15,7 @@ public partial class TelaSuporte : ContentPage
 	{
         NavigationPage.SetHasNavigationBar(this, false);
         InitializeComponent();
-        FAQlist.ItemsSource = getFAQ();
+        BindingContext = new PageSuporteVM();
 	}
 
     private void Button_Clicked(object sender, EventArgs e)
@@ -45,41 +46,7 @@ public partial class TelaSuporte : ContentPage
             btDuv.Text = "▼ DÚVIDAS OU PROBLEMAS TÉCNICOS";
         }
     }
-    public List<MSGfaq> getFAQ()
-    {
-        List<MSGfaq> listFAQ = new List<MSGfaq>();
-
-        List<string> perguntas = new List<string>
-        {
-        " ➢ Como posso adicionar um novo evento na semana?",
-        " ➢ Não estou conseguindo visualizar meus projetos em execução, o que devo fazer? Onde posso ver o progresso atual do meu projeto?",
-        " ➢ Como posso ficar em alerta quanto a metas importantes do meu projeto? Não estou conseguindo marcar como concluída uma determinada etapa do meu projeto, o que devo fazer?",
-        " ➢ Ainda estou com dúvidas ou encontrei um problema no aplicativo, qual o próximo passo?"
-    };
-        List<string> respostas = new List<string>
-        {
-        "Vá para a área agenda e clique em Adicionar.",
-        "Tente verificar se você está conectado a Internet, se não resolver, tente entrar em contato com um atendente.",
-        "Clique na opção 'DÚVIDAS OU PROBLEMAS TÉCNICOS' e fale com um atendente.",
-        " Se você possui alguma dúvida e ela não pôde ser respondida pela FAQ, recomendamos que utilize nossa aba de Dúvidas ou Problemas Técnicos , onde poderá entrar em contato conosco por meio de um e-mail ou falando diretamente com um de nossos atendentes"
-
-        };
-
-
-
-
-        
-        for(int i = 0; i < 3; i++) {
-            MSGfaq faq = new MSGfaq
-            {
-                pergunta = perguntas[i],
-                resposta = respostas[i]
-            };
-            
-            listFAQ.Add(faq);
-                }
-        return listFAQ;
-    }
+    
     [Obsolete]
     private void btCarta_Clicked(object sender, EventArgs e)
     {
@@ -167,6 +134,10 @@ public partial class TelaSuporte : ContentPage
         {
             var lastMsg = msgs[msgs.Count - 1];
             listMSG.ScrollTo(lastMsg, ScrollToPosition.End, false);
+        }
+        if(BindingContext is PageSuporteVM view)
+        {
+            view.getFAQ.Execute(null);
         }
     }
 
